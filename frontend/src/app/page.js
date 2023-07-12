@@ -3,38 +3,26 @@ import Head from "next/head";
 import React from "react";
 
 import CardTemplate from "../../components/Card/CardTemplate";
-// const axios = require('axios');
+import Api from "../../utils/api";
 
-// let config = {
-//   method: 'get',
-//   maxBodyLength: Infinity,
-//   url: '/item/0',
-//   mode: 'cors',
-//   headers: { 
+export default async function Home() {
+  const idArray = await Api(0)
+  console.log("entries=",idArray);
+  async function cards() {
+    return idArray.map((id)=>{
+      return (<CardTemplate index={id}/>)
+    });
+      
     
-//   },
-//   data: ''
-// };
 
-// axios.request(config)
-// .then((response) => {
-//   console.log(JSON.stringify(response.data));
-// })
-// .catch((error) => {
-//   console.log(error);
-// });
-
-
-export default function Home() {
-  function cards(){
-    return <CardTemplate />
   }
+  
   return (
     <>
       <Head>
         <link rel="stylesheet" href="/styles/css/styles.css" />
       </Head>
-      {cards()}
+      {await cards()}
     </>
   );
 }

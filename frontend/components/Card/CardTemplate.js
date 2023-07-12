@@ -1,3 +1,4 @@
+
 import React from "react";
 // material-ui components
 import { makeStyles } from "@material-ui/core/styles";
@@ -15,6 +16,7 @@ import {
 } from "/styles/nextjs-material-kit.js";
 import imagesStyles from "/styles/imagesStyles.js";
 import Image from "next/image";
+import Api from "../../utils/api";
 const styles = {
   ...imagesStyles,
   cardTitle,
@@ -31,9 +33,17 @@ const styles = {
   cardSubtitle,
 };
 
-const useStyles = makeStyles(styles);
-export default function CardTemplate({index}) {
-  const classes = useStyles();
+const myStyles = makeStyles(styles);
+async function Data(index){
+  return await Api(index)
+}
+
+export default async function CardTemplate({index}) {
+  // console.log(index)
+  // const data = Api(index)
+  let data = await Api(1)
+  console.log(Data(1))
+  const classes = myStyles();
   return (
     <Card>
       <Image
