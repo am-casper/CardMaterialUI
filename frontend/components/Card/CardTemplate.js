@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 // material-ui components
 import { makeStyles } from "@material-ui/core/styles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -34,16 +33,22 @@ const styles = {
 };
 
 const myStyles = makeStyles(styles);
-async function Data(index){
-  return await Api(index)
-}
 
-export default async function CardTemplate({index}) {
+export default function CardTemplate({ index }) {
   // console.log(index)
-  // const data = Api(index)
-  let data = await Api(1)
-  console.log(Data(1))
+  let [data, setData] = useState({});
+  useEffect(() => {
+    console.log("hi");
+    const func = async () => {
+      data = await Api(index);
+      setData(data);
+      // console.log(data.itemName)
+    };
+    func();
+  }, []);
+  // console.log(data)
   const classes = myStyles();
+  // console.log(data.itemName)
   return (
     <Card>
       <Image
@@ -56,12 +61,12 @@ export default async function CardTemplate({index}) {
 
       <CardBody>
         <h1 className={classes.cardTitle}>
-          <p className={classes.textCenter}>Card title</p>
+          <p className={classes.textCenter}>{data.itemName}</p>
         </h1>
         <div className="rowC">
           <p className={classes.textLeft}>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            {data.itemDesc} <br />
+            Rs.{data.itemPrice}
           </p>
           <div className={classes.textRight}>
             <Button color="primary">
