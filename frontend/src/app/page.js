@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import Head from "next/head";
 import React from "react";
 
@@ -10,7 +10,7 @@ export default async function Home() {
   console.log("entries=",idArray);
   async function cards() {
     return idArray.map((id)=>{
-      return (<CardTemplate index={id}/>)
+      return (<CardTemplate index={id} key={id}/>)
     });
       
     

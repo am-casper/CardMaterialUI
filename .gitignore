@@ -37,7 +37,7 @@ next-env.d.ts
 
 #Django stuff:
 *.log
-*.pot
+*.po bact
 *.pyc
 __pycache__/
 myvenv/
